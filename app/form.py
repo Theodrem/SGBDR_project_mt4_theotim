@@ -10,6 +10,7 @@ class AttributeForm(FlaskForm):
             ('title', 'Titre'),
             ('category.name', 'Categorie'),
             ('rental', 'Nombre de location'),
+            ('rental_rate', 'Prix'),
         ],
     )
     order = SelectField(

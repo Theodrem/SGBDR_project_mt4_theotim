@@ -12,7 +12,7 @@ from app import app
 
 REQ = {
     "REQ": "SELECT distinct film.title ,"
-    " film.replacement_cost, category.name, film.rating,"
+    " film.rental_rate, category.name, film.rating,"
     "floor(COUNT(*) OVER() / %s) as nb_pages,"
     " COUNT(title) as rental FROM film"
     " JOIN film_category ON (film.film_id = film_category.film_id)"
