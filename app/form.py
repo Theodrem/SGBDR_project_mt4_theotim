@@ -11,15 +11,19 @@ class AttributeForm(FlaskForm):
             ('category.name', 'Categorie'),
             ('rental', 'Nombre de location'),
         ],
+        label="Trier par",
     )
     order = SelectField(
         'order',
         default="ASC",
-        choices=[('ASC', 'Croissant'), ('DESC', 'Décroissant')],
+        choices=[('ASC', 'Ascendant'), ('DESC', 'Déscendant')],
+        label="Ordre des résultats",
     )
+
     limit = SelectField(
-        'order',
+        'limit',
         default=10,
         choices=[(10, 10), (25, 25), (50, 50), (100, 100)],
+        label="Nombre de résultat",
     )
     submit = SubmitField('Submit')

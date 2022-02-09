@@ -11,9 +11,9 @@
         <form class="d-flex justify-content-around" method="POST" action="{{ url_for('index') }}" style="margin-top: 30px">
             <div class="form-group">
                 {{ form.hidden_tag() }}
-                {{ form.order_by() }}
-                {{ form.order() }}
-                {{ form.limit() }}
+                {{ form.order_by.label }}{{ form.order_by() }}
+                {{ form.order.label }}{{ form.order() }}
+                {{ form.limit.label }}{{ form.limit() }}
                 <p>{{ form.submit() }}</p>
         </form>
     </div>
