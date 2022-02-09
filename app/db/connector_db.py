@@ -3,17 +3,17 @@ import os
 
 
 class Connector:
-    def __init__(self):
+    def __init__(self, host, user, password, database, port):
         """
         Contains the connection data to mysql
         """
 
         self.conn = MC.connect(
-            host=os.environ.get("HOST_SGBDR"),
-            user=os.environ.get("USER_SGBDR"),
-            password=os.environ.get("PASSWORD_SGBDR"),
-            database=os.environ.get("DATABASE_SGBDR"),
-            port=os.environ.get("PORT_SGBDR"),
+            host=host,
+            user=user,
+            password=password,
+            database=database,
+            port=port,
         )
         self.cursor = self.conn.cursor(buffered=True, dictionary=True)
 

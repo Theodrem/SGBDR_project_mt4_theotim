@@ -1,3 +1,4 @@
+import os
 from flask import request, render_template, redirect, url_for
 from app.db.connector_db import Connector
 from flask_paginate import Pagination
@@ -13,12 +14,12 @@ from app import app
 REQ = {
     "REQ": "SELECT distinct film.title ,"
     " film.rental_rate, category.name, film.rating,"
-    "floor(COUNT(*) OVER() / %s) as nb_pages,"
+    "ceil(COUNT(*) OVER() / %s) as nb_pages,"
     " COUNT(title) as rental FROM film"
     " JOIN film_category ON (film.film_id = film_category.film_id)"
     " JOIN category ON (category.category_id = film_category.category_id)"
-    " JOIN inventory ON ( film.film_id = inventory.film_id)"
-    " JOIN rental  ON ( rental.inventory_id = inventory.inventory_id)"
+    " LEFT JOIN inventory ON ( film.film_id = inventory.film_id)"
+    " LEFT JOIN rental  ON ( rental.inventory_id = inventory.inventory_id)"
     " GROUP BY title"
     " ORDER BY %s %s"
     " LIMIT %s OFFSET %s"
@@ -46,15 +47,26 @@ def index():
     limit = request.args.get('limit', default=10)
 
     page = request.args.get('page', default=0)
+
     offset = int(limit) * int(page)
+    if int(offset) >= int(limit):
+        offset = int(limit) * int(page) - int(limit)
     movie_request = REQ['REQ'] % (limit, order_by, order, limit, offset)
 
-    c = Connector()
+    c = Connector(
+        host=os.environ.get("HOST_SGBDR"),
+        user=os.environ.get("USER_SGBDR"),
+        password=os.environ.get("PASSWORD_SGBDR"),
+        database=os.environ.get("DATABASE_SGBDR"),
+        port=os.environ.get("PORT_SGBDR"),
+    )
     data = c.fetch_rows(movie_request)
     c.close()
 
     nb_pages = data[0]['nb_pages']
+
     nb_pages *= int(limit)
+    print(nb_pages)
     pagination = Pagination(page=page, total=int(nb_pages), per_page=limit)
 
     return render_template(
