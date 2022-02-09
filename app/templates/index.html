@@ -9,11 +9,19 @@
 <div>
     <div>
         <form class="d-flex justify-content-around" method="POST" action="{{ url_for('index') }}" style="margin-top: 30px">
+            {{ form.hidden_tag() }}
             <div class="form-group">
-                {{ form.hidden_tag() }}
-                {{ form.order_by.label }}{{ form.order_by() }}
-                {{ form.order.label }}{{ form.order() }}
-                {{ form.limit.label }}{{ form.limit() }}
+                <label for="exampleInputEmail1">Trier par</label>
+                {{ form.order_by() }}
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nombre de résultat</label>
+                {{ form.limit() }}
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ordre</label>
+                {{ form.order() }}
+            </div>
                 <p>{{ form.submit() }}</p>
         </form>
     </div>
