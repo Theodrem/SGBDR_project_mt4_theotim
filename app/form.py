@@ -8,7 +8,7 @@ class AttributeForm(FlaskForm):
         default="title",
         choices=[
             ('title', 'Titre'),
-            ('category.name', 'Categorie'),
+            ('category.name', 'Genre'),
             ('rental', 'Nombre de location'),
             ('rental_rate', 'Prix'),
         ],
