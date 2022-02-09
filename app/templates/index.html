@@ -12,17 +12,17 @@
             {{ form.hidden_tag() }}
             <div class="form-group">
                 <label for="exampleInputEmail1">Trier par</label>
-                {{ form.order_by() }}
+                {{ form.order_by(class="custom-select") }}
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nombre de résultat</label>
-                {{ form.limit() }}
+                {{ form.limit(class="custom-select") }}
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Ordre</label>
-                {{ form.order() }}
+                {{ form.order(class="custom-select") }}
             </div>
-                <p>{{ form.submit() }}</p>
+                <p style="margin-top: 30px;">{{ form.submit(class="btn btn-primary") }}</p>
         </form>
     </div>
     <div class="d-flex justify-content-around">

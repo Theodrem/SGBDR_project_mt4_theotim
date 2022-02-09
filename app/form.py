@@ -24,4 +24,4 @@ class AttributeForm(FlaskForm):
         default=10,
         choices=[(10, 10), (25, 25), (50, 50), (100, 100)],
     )
-    submit = SubmitField('Submit')
+    submit = SubmitField('Envoyer')
