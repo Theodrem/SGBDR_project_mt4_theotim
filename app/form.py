@@ -9,7 +9,7 @@ class AttributeForm(FlaskForm):
         choices=[
             ('title', 'Titre'),
             ('category.name', 'Categorie'),
-            ('rating', 'Classement'),
+            ('rental', 'Nombre de location'),
         ],
     )
     order = SelectField(
