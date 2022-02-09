@@ -17,5 +17,9 @@ class AttributeForm(FlaskForm):
         default="ASC",
         choices=[('ASC', 'Croissant'), ('DESC', 'Décroissant')],
     )
-    limit = IntegerField('limit', default=10)
+    limit = SelectField(
+        'order',
+        default=10,
+        choices=[(10, 10), (25, 25), (50, 50), (100, 100)],
+    )
     submit = SubmitField('Submit')
