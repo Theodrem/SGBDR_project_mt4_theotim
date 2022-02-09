@@ -52,7 +52,6 @@ def index():
     if int(offset) >= int(limit):
         offset = int(limit) * int(page) - int(limit)
     movie_request = REQ['REQ'] % (limit, order_by, order, limit, offset)
-
     c = Connector(
         host=os.environ.get("HOST_SGBDR"),
         user=os.environ.get("USER_SGBDR"),
@@ -62,8 +61,10 @@ def index():
     )
     data = c.fetch_rows(movie_request)
     c.close()
-
-    nb_pages = data[0]['nb_pages']
+    try:
+        nb_pages = data[0]['nb_pages']
+    except (IndexError):
+        return redirect(url_for("index"))
 
     nb_pages *= int(limit)
     print(nb_pages)
