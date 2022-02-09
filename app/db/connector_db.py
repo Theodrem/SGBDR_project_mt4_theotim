@@ -1,5 +1,5 @@
 import mysql.connector as MC
-from decouple import config
+import os
 
 
 class Connector:
@@ -9,11 +9,11 @@ class Connector:
         """
 
         self.conn = MC.connect(
-            host=config("HOST_SGBDR"),
-            user=config("USER_SGBDR"),
-            password=config("PASSWORD_SGBDR"),
-            database=config("DATABASE_SGBDR"),
-            port=config("PORT_SGBDR"),
+            host=os.environ.get("HOST_SGBDR"),
+            user=os.environ.get("USER_SGBDR"),
+            password=os.environ.get("PASSWORD_SGBDR"),
+            database=os.environ.get("DATABASE_SGBDR"),
+            port=os.environ.get("PORT_SGBDR"),
         )
         self.cursor = self.conn.cursor(buffered=True, dictionary=True)
 
